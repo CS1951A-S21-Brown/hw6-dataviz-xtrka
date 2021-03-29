@@ -7,20 +7,90 @@
         <link rel="stylesheet" href="main.css"/>
         <!--Feel free to add more CSS files as needed-->
         <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+        <style type="text/css">
+            .tooltip {
+                position: absolute;
+                font-size: 20px;
+                padding: 10px;
+                width:  150px;
+                height: auto;
+                pointer-events: none;
+                background-color: white;
+                font-weight: bold;
+                text-align: center;
+                border-radius: 20px;
+            }
+            .written {
+                text-align: left;
+                height: 775px;
+                clear: both;
+                margin-top: -200px;
+                margin-left: 75px;
+                margin-right: 75px;
+            }
+        </style>
     </head>
 <body>
     <div class="header">
         <h3>Assignment 6 &laquo; Data Visualization Dashboard &raquo;</h3>
+        <h5 style="font-weight:normal;"><em>Understanding global video games sales.</em></h5>
     </div>
+    <hr>
     <!--  We included a basic HTML structure for the 3 graphs here. Feel free to change this if you'd like  -->
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 text-center">
             <div id="graph1"></div>
+            <label for="genres">Select Genre:</label>
+            <select id="genres" name="genres" onchange=displayGenre(value)>
+                <option value="Sports">Sports</option>
+                <option value="Platform">Platform</option>
+                <option value="Racing">Racing</option>
+                <option value="Role-Playing">Role-Playing</option>
+                <option value="Puzzle">Puzzle</option>
+                <option value="Misc">Misc</option>
+                <option value="Shooter">Shooter</option>
+                <option value="Simulation">Simulation</option>
+                <option value="Action">Action</option>
+                <option value="Fighting">Fighting</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Strategy">Strategy</option>
+            </select>
             <div id="graph2"></div><br/>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 text-center">
             <div id="graph3"></div>
+            <label for="genres">Select Region:</label>
+            <button onclick="displayRegion('NA_Sales')">NA</button>
+            <button onclick="displayRegion('EU_Sales')">EU</button>
+            <button onclick="displayRegion('JP_Sales')">JP</button>
         </div>
+    </div>
+    <div class="written" style="border-top: 2px solid">
+        <h2>Written Questions</h3>
+        <hr>
+        <h4>Describe how your dashboard answers the questions presented. You don't have to address every question directly, but should at a high level address the main questions.</h4>
+            <p>Graph 1 shows the top 10 video games of all time. The ten games with the most global sales are displayed on a barplot, sorted by descending global sales. The total number of global sales for each game is also displayed. <br>
+            Graph 2 shows the top 5 publishers for a selected genre. The five publishers with the most global sales in that genre are displayed on a barplot, sorted by descending global sales. The total number of global sales for each publisher is also displayed. The bar for the top publisher is distinguished by the red color. The barplot updates with new data when a user changes the genre on the drop down menu. <br>
+            Graph 3 shows genre sales broken out by region. The pie chart shows the proportion of regional sales for each genre. On hover, a tooltip appears that displays the genre and the percentage of regional sales that genre accounts for (see "Extra Credit" below). The pie chart updates with new data when a user changes the region using the buttons.</p>
+        <h4>List 3 reasons why D3 was helpful and improved your visualization.</h4>
+            <p> Reason 1. Takes a lot of (complex) data and returns clean and simple visualizations that convey appropriate information. <br>
+            Reason 2. Wide variety of available plots. Developer has more choice in selecting a plot that will best communicate information or answer a question. <br>
+            Reason 3. Lots of available resources that provide a starting point and further guidance.
+            </p>
+        <h4>List 3 reasons why D3 would not be the best tool for creating a visualization.</h4>
+            <p> Reason 1. Many plot choices, each with individual attributes/style choices. Leads to difficulty with fully understanding capabilities of each plot (i.e., barplot vs. pie chart). <br>
+            Reason 2. Ability to customize visualizations and include a lot of interactivity may lead to overly complex and busy visualizations.<br>
+            Reason 3. Requires building from stratch. May be time-inefficient as there are other libraries that can be used to create simple visualizations quickly. 
+            </p>
+        <h4>What kinds of users might find this dashboard accessible and who might have more difficulty? What additional actions might you take to make this dashboard more accessible to all audiences?</h4>
+            <p> This dashboard employed techniques to improve accessibility. A particular focus was put on color. Constrasting colors were chosen for all the plots, and in Graph 3, the color darkens on hover to distinguish a selection. Users with colorblindness or low vision may find the vibrant, constrasting colors helpful. The dashboard uses animations on load and when Genre (Graph 2) and Region (Graph 3) are changed, which may affect people with epilepsy, ADHD, or cognitive disabilities. Perhaps an additional improvement could be made to allow users to control animations (turn on/off). The visualizations include descriptive design elements, such as titles and labels, but simple text descriptions of the plots can also be included to incorporate Assistive Technology. 
+            </p>
+        <h4>What are some factors that kept you from taking steps in the design and implementation process to make your dashboard more accessible to all audiences?</h4>
+            <p> Overall, there were difficulties with implementation. It was challenging to understand the full capabilities of the D3 library, so not all original design plans to make the dashboard more accessible were included in the final product. Additionally, if we had a better understanding of intended audience, the dashboard could be customized to user needs and preferences. 
+            </p>
+        <p>
+            <em> <b>Extra Credit:</b> The tooltip in Graph 3 shows a dynamic stats calculation. For each, it calculates the percentage of video games sold in the selected region compared to all video games sold in the region. The percentages update as region updates.</em>
+        </p>
     </div>
     <!--Feel free to add more JavaScript files as needed-->
     <script type="text/javascript" src="main.js"></script>
